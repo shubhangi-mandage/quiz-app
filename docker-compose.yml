@@ -1,0 +1,24 @@
+
+version: '3.8'
+
+services:
+  quiz-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://quiz-db:27017/quizdb
+    depends_on:
+      - quiz-db
+
+  quiz-db:
+    image: mongo:5
+    container_name: quiz-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - quiz-data:/data/db
+
+volumes:
+  quiz-data:
+    
